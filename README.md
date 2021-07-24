@@ -1,2 +1,2 @@
 # FoodReminder
-An front-end only project.
+An 2-people front-end only project.
