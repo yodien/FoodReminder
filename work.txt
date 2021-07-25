@@ -1,0 +1,11 @@
+Shuo Zhang:	-Navigation Bar Structure design and implementation.
+		-javascript array structure edition.
+		-Home Page structure,logic design and implementation and test.
+		-BrowserReview Page structure,logic and implementation and test.
+		-All parts debuging and General functional test.
+
+Hongzhao Tan:	-Navigation Bar implementation.
+		-javascript array structure, logic design and edition.
+		-CreateReview Page structure,logic and implementation and test.
+		-Search Review Page structure,logic and implementation and test.
+		-All parts debuging and General functional test.

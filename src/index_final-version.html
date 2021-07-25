@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<title>FoodReminder</title>
+<link rel="shortcut icon" href="myicon.ico">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.navi{
+  background-color: #003333;
+  margin: 0;
+  padding: 5px;
+  overflow: hidden;
+  list-style-type: none;
+  top:0;
+  left:0;
+  width: 100%;
+  display: block;
+}
+
+.navii{
+  float: left;
+  width: 15%;
+}
+
+.navii a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 12px 30px;
+  text-decoration: none;
+}
+
+.navii:hover {
+  background-color: #181818;
+}
+a:active {
+  color: red;
+}
+
+#CreateReviewPage {
+	top: 90px;
+	width: 100%;
+	position: relative;
+	bottom:0;
+	overflow: hidden;
+}
+
+#restaurantNameInput, #foodNameInput, #foodPriceInput, #restaurantTeleInput{
+	width: 50%
+	
+}
+
+#registeredRestaurants{
+	width: 50%
+}
+
+#foodCuisineInput{
+	width: 30%
+}
+
+#ratingRadioButtonsField{
+	width: 35%
+	
+}
+
+
+#SearchRestaurantPage {
+	top: 90px;
+	width: 100%;
+	position: relative;
+	bottom:0;
+	overflow: hidden;
+}
+
+#searchRestMethodInput{
+	width: 65%;
+
+
+}
+#lastAttendedInput{
+	width:45%
+}
+
+
+
+.homepagetopleft {
+  display: inline-block;
+  width: 50%;
+  height: 200px;
+ /* background-color: yellow; */
+}
+
+.homepagetopright {
+  display: inline-block;
+  width: 49%;
+  height: 200px;
+  /*background-color: pink;*/
+}
+
+.homepagelogo {
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+.homepagebotleft {
+  display: inline-block;
+  width: 50%;
+}
+
+.homepagebotright {
+  display: inline-block;
+  width: 49%;
+  height: 200px;
+}
+.directingb {
+  border-radius: 10px;
+  width: 40%;
+  height: 50px;
+  line-height: 50px;
+  top: 25%;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  background: rgba(0, 51, 51, 1);
+  color: white;
+  font-size: 20px;
+}
+.directingb:hover {
+	background: rgba(255, 255, 255, 0.66);
+}
+.homeimg {
+    position: relative;
+    top: 60%;
+    left: 40%;
+    transform: translateX(-50%) translateY(-50%);
+    max-width: 350px;
+    max-height: 200px;
+}
+.MainContent {
+  width: 100%;
+  position: relative;
+  bottom:0;
+}
+.selectiongroups {
+  background-color: #003333;
+  margin: 0;
+  top:0;
+  left:0;
+  width: 100%;
+}
+::placeholder {
+
+  font-size: 12px;
+  font-weight: bold;
+}
+.spacing {
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+.searchingresult {
+	background-color:#B9FF92;
+	position: relative;
+	width: 65%;
+	height: 200px;
+}
+.resulttop {
+	margin-top: 0;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: top;
+	display: inline-block;
+}
+.resultbot {
+	bottom: 0px;
+	font-size: 10px;
+	font-weight: bold;
+	text-align: bottom;
+	display: inline-block;
+	position: absolute;
+}
+.resultcontext {
+	top: 10%;
+	left: 5%;
+	background-color:#FFF2CC;
+	height: 160px;
+	overflow: auto;
+	width: 80%;
+	position: absolute;
+}
+.center {
+  margin-top: 250px;
+  margin-left: 25%;
+  width: 60%;
+  padding: 50px;
+}
+
+
+</style>
+</head>
+<body style="background-color:#003333;">
+<div id="navig" style="display:block;">
+<!--navigation bar with 4 elements-->
+<ul class="navi">
+  <li class="navii" id="homeNav" style="background-color:#003333;"><a href="#"><img src="logo.png" alt="logo" style="width:70%"></a></li>
+  <li class="navii" id="createReviewNav"><a href="#createReview" id="lk01">Create Review</a></li>
+  <li class="navii" id="browseReviewNav"><a href="#browseReviews" id="lk02">Browser Review</a></li>
+  <li class="navii" id="searchRestaurantNav"><a href="#searchRestaurant" id="lk03">Search Restaurant</a></li>
+  <li style="float:right;display:none;" id="clearallbtn"><button type="button" class="btn btn-danger btn-sm" onclick="deleteallfunc('all')">Clear Review</button></li>
+</ul>
+</div>
+
+<!--Homepage-->
+<div id="HomePage" class="MainContent" style="display:block;">
+  <div class="homepagetopleft">
+	   <img src="picture/wendys1.jpg" class="homeimg" id="homeimg1">
+  </div>
+  <div class="homepagetopright">
+	   <div class="directingb" onclick="gotocreate()">
+		     <b>create your review</b>
+	   </div>
+  </div>
+  <div class="homepagelogo">
+  <form id="form1">
+	   <img src="logo.png" alt="logo" class="homeimg" style="left:50%" onclick="repicc()">
+  </form>
+  </div>
+  <div class="homepagebotleft">
+	  <img src="picture/baburrito1.jpg" class="homeimg" id="homeimg2" style="top:100px;left:25%;width:250px;height:150px;">
+	  <div class="directingb" style="top:100px;"  onclick="gotosearch()">
+		  <b>Search a restaurant</b>
+	  </div>
+  </div>
+  <div class="homepagebotright">
+	  <div class="directingb" style="top:-50px; right:-100px;"  onclick="gotobrowser()">
+		  <b>The taste I have tried</b>
+	  </div>
+	  <img src="picture/popeyes1.jpg" class="homeimg" id="homeimg3" style="top:150px; width:350px;height:200px;">
+  </div>
+</div>
+
+<div id="CreateReviewPage" class = "container-lg" style="display:None">
+<!--Enter content code here-->
+	<h1 style = "text-align: left"> Create New Food Review </h1><span id="moding"></span>
+
+	<form>
+		<div class="row">
+			<div class="col-lg">
+
+				<div class="form-group" id = "registeredRestaurantsDiv" style="display:block">
+					<label for="registeredRestaurants" class="form-control-label">Choose From Registered Restaurant Or Register New Restaurant:</label>
+					<select name="registeredRestaurants" id="registeredRestaurants" class="custom-select">
+
+					</select>
+				</div>
+
+				<div class="form-group" id = "restaurantNameInputDiv" style="display:None">
+					<label for="restaurantNameInput" class="form-control-label">New Restaurant Name:</label>
+					<input type="text" class="form-control" id="restaurantNameInput">
+					<div id="restaurantNameInputFeedback" class="invalid-feedback"></div>
+				</div>
+
+				<div class="form-group">
+					<label for="foodNameInput" class="form-control-label">Food Name:</label>
+					<input type="text" class="form-control" id="foodNameInput">
+					<div id="foodNameInputFeedback" class="invalid-feedback"> </div>
+				</div>
+
+				<div class="form-group">
+					<label for="foodPriceInput" class="form-control-label">Price(In CAD):</label>
+					<input type="number" min="1" step="0.1" class="form-control" id="foodPriceInput">
+					<div id="foodPriceInputFeedback" class="invalid-feedback"> </div>
+				</div>
+
+				<div class="form-group">
+					<label for="foodCommentInput" class="form-control-label">Comment:</label>
+					<input type="text" class="form-control" id="foodCommentInput">
+					<div id="foodCommentInputFeedback" class="invalid-feedback"> </div>
+				</div>
+
+				<div class="form-group">
+					<label for="foodCuisineInput" class="form-control-label">Cuisine:</label>
+					<select name="foodCuisineInput" id="foodCuisineInput" class="custom-select">
+						<option value="Unknown">Unknown</option>
+						<option value="Chinese">Chinese</option>
+						<option value="FastFood">Fast Food</option>
+						<option value="Germany">Germany</option>
+						<option value="Indian">Indian</option>
+						<option value="Italian">Italian</option>
+						<option value="Japanese">Japanese</option>
+						<option value="Mexican">Mexican</option>
+						<option value="MiddleEastern">Middle Eastern</option>
+					</select>
+					<!-- <label for="foodCuisineInput">Cuisine:</label>
+					<input type="text" class="form-control" id="foodCuisineInput">
+					<div id="foodCuisineInputFeedback" class="invalid-feedback"> </div>-->
+				</div>
+
+				<div class= "reviewRatingButtons">
+					<fieldset id="ratingRadioButtonsField">
+						<legend>Rate the food: </legend>
+						<input type="radio" id="ratingFive" value="5" name="ratingButton" checked>
+						<label for="ratingFive" >Tastes Very Good</label><br>
+						<input type="radio" id="ratingFour" value="4" name="ratingButton">
+						<label for="ratingFour">Tastes Good</label><br>
+						<input type="radio" id="ratingThree" value="3" name="ratingButton">
+						<label for="ratingThree">Teastes Normal</label><br>
+						<input type="radio" id="ratingTwo" value="2" name="ratingButton">
+						<label for="ratingTwo">Tastes Bad</label><br>
+						<input type="radio" id="ratingOne" value="1" name="ratingButton">
+						<label for="ratingOne">Tastes Very Bad</label><br>
+					</fieldset>
+				</div> <br/>
+				<div class= "confirmCreationButtons">
+					<input type="button" id="createReview" class="btn btn-primary">
+					<input type="button" value="Reset" class="btn btn-secondary" id="reset">
+				</div>
+
+			</div>
+			<div class="col-sm">
+				<!--<input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg, image/jpg">-->
+				<div class="input-group mb-3">
+					<div class="custom-file">
+						<input type="file" class="custom-file-input" id="foodPictureInput" accept="image/png, image/jpeg, img/jpg">
+						<label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02" id="foodPictureInputLabel"></label>
+					</div>
+				</div>
+				<span id="showPictureInput"></span> <br/>
+				<div class="form-group">
+					<label for="restaurantTeleInput" class="form-control-label">Restaurant's Telephone Number:</label>
+					<input type="number" min="1000000000" max = "9999999999" step="1" class="form-control" id="restaurantTeleInput">
+					<div id="restaurantTeleInputFeedback" class="invalid-feedback"> </div>
+				</div>
+			</div>
+
+		</div>
+	</form>
+	<br/>
+	<div class="alert alert-primary" style="display:none" id="status" role="alert"></div>
+	<div class= "finishCreationButtons" style="display:none" id= "finishCreationButtons">
+		<input type="button" value="Create Another Review" id="createAnotherReview" class="btn btn-secondary">
+		<input type="button" value="Jump To Browser Review Page" class="btn btn-primary" id="toBrowseReview" onclick="gotobrowser()">
+	</div> </br>
+<!---->
+</div>
+
+<!--browser page here-->
+<div id="deleteallconfirm" style="display:none;">
+	<div class="center">
+		<h1>Are You sure you want to delete all your reviews?</h1>
+		<input type="text" id="lastdelete1" size="50" placeholder="Enter 'confirm' to confirm deleting." />
+		<button type="button" class="btn btn-outline-danger" onclick="jumpback1('deleteclick')">Delete</button>
+		<button type="button" class="btn btn-outline-secondary" onclick="jumpback1('')">Cancel</button>
+	</div>
+</div>
+
+<div id="deleteoneconfirm" style="display:none;">
+</div>
+
+<div id="bigpicture" style="display:none;">
+</div>
+
+<div id="BrowserPage" class="MainContent" style="display:none;">
+  <div class="selectiongroups">
+    <form>
+		  <input type="radio" name="chosenoption" id="option1" checked />
+		  <input type="text" list="myresnamelist" id="myrestname" placeholder="Enter restaurant name" class="spacing" />
+      <datalist id="myresnamelist">
+
+      </datalist>
+
+		  <input type="radio" name="chosenoption" id="option2" />
+		  <select id="mycuisine" style="margin-right:69px;">
+			  <option value="" disabled selected>Select Cuisine</option>
+        <option value="Unknown" style="font-weight:bold;">Unknown</option>
+        <option value="Chinese" style="font-weight:bold;">Chinese</option>
+        <option value="FastFood" style="font-weight:bold;">Fast Food</option>
+        <option value="Germany" style="font-weight:bold;">Germany</option>
+        <option value="Indian" style="font-weight:bold;">Indian</option>
+        <option value="Italian" style="font-weight:bold;">Italian</option>
+        <option value="Japanese" style="font-weight:bold;">Japanese</option>
+        <option value="Mexican" style="font-weight:bold;">Mexican</option>
+        <option value="MiddleEastern" style="font-weight:bold;">Middle Eastern</option>
+		  </select>
+
+		  <input type="radio" name="chosenoption" id="option3" />
+	  	<select id="myrate">
+			  <option value="" disabled selected>Select Rate</option>
+		  	<option value=1 style="font-weight:bold;">1</option>
+		  	<option value=2 style="font-weight:bold;">2</option>
+		  	<option value=3 style="font-weight:bold;">3</option>
+		  	<option value=4 style="font-weight:bold;">4</option>
+		  	<option value=5 style="font-weight:bold;">5</option>
+		  </select>
+		  <button type="button" class="btn btn-success btn-lg" style="margin-left:200px" onclick="filteringreview()">Go</button>
+	  	<br />
+		  <input type="radio" name="chosenoption" id="option4" />
+		  <input type="text" id="myfoodname" list="myfoodnamelist" placeholder="Enter food name" class="spacing" />
+      <datalist id="myfoodnamelist">
+
+      </datalist>
+
+		  <input type="radio" name="chosenoption" id="option5" />
+		  <select id="myfoodprice" class="spacing" >
+			  <option value="" disabled selected>Select Price Interval</option>
+		  	<option value=1 style="font-weight:bold;">Less than $10</option>
+		  	<option value=2 style="font-weight:bold;">$10 to $15</option>
+		  	<option value=3 style="font-weight:bold;">$15 to $20</option>
+	  		<option value=4 style="font-weight:bold;">Greater than $20</option>
+	  	</select>
+
+	  	<input type="radio" name="chosenoption" id="option6" />
+		  <label for="myorderdate" style="color:white; font-weight:bold;">Date of Order:</label>
+	  	<input type="date" id="myorderdate" />
+	  </form>
+  </div>
+  <div style="display:none;" id="thelongbutton">
+
+  </div>
+  <div id="demo">
+  </div>
+  <div style="position: fixed;right: 0;bottom: 0;">
+    <b>Sorted by: </b><span id="sortby"></span>
+  </div>
+</div>
+
+<!-- Search Restaurant Page HTML -->
+
+<div id="SearchRestaurantPage" class = "container-lg" style="display:None">
+	<h1 style="text-align:center">Search Restaurants and Restaurants' Analysis</h1></br>
+	<form>
+		<div class="row">
+		
+			<div class="col-lg">
+				<div class="form-group" id = "restaurantsInSearchDiv" style="display:block">
+					<label for="restaurantsInSearch" class="form-control-label">Choose A Registered Restaurant:</label>
+					<select name="restaurantsInSearch" id="restaurantsInSearch" class="custom-select">
+							
+					</select>
+				</div>
+				
+				<div class="form-group" id = "avgPriceInputDiv" style="display:none">
+					<label for="avgPriceInput" class="form-control-label">Enter Your Max Average Price(In CAD):</label>
+					<input type="number" min="1" step="0.1" class="form-control" id="avgPriceInput">
+					<div id="avgPriceInputFeedback" class="invalid-feedback"> </div>
+				</div>
+				
+				<div class="form-group" id = "lastAttendedInputDiv" style="display:none">
+					<label for="lastAttendedInput" class="form-control-label">Last Attended Date Before:</label>
+					<input type="date" id="lastAttendedInput" name="lastAttendedInput" class="form-control">
+					<div id="lastAttendedInputFeedback" class="invalid-feedback"> </div>
+				</div>
+				<input type="button" id="startSearchRestaurant" class="btn btn-primary" value="Search">
+				<input type="button" id="resetSearchRestaurantPage" class="btn btn-secondary" value="Reset Analysis">
+
+			</div>
+			<div class="col-lg">
+				
+				<div class="form-group">
+					<br/>
+					<label for="searchRestMethodInput" class="form-control-label">Search Methods:</label>
+					<select name="searchRestMethodInput" id="searchRestMethodInput" class="custom-select">
+						<option value="Search By Restaurant's Name">Search By Restaurant's Name</option>
+						<option value="Search By Restaurant's Average Price">Search By Restaurant's Average Price</option>
+						<option value="Search By Last Attended Date">Search By Last Attended Date</option>
+					</select>
+				</div>
+			</div>
+		</div><br/><br/>
+	</form>
+	<div class="row" id="restaurantTable">
+		<input type="button" id="sortRestaurantsByRate" class="btn btn-primary" value="Sort By Average Rating">
+		<table class="table" >
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Last Attended At</th>
+					<th scope="col">Average Price</th>
+					<th scope="col">Average Rating(out of 5)</th>
+					<th scope="col">Contact Restaurant</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody id="restaurantTableBody">
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+<!---->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    var myfoodlist = [];    //I add a list of food here;
+    var filteredRestaurants = [];
+		var Restaurants = [];
+		var Reviews = [];
+		var mode = "NotInCreate";
+		var pageNowIn = "Home";
+		var newReviewID = 0;
+		function getRestOptionStr(){
+			optStr='<option value="newRestaurant">New Restaurant</option>';
+			for (r of Restaurants){
+				optStr = optStr + '<option value="' + r.name + '">' + r.name + "</option>";
+			}
+			return optStr;
+		}
+
+
+    function deleteallfunc(para){
+		document.body.style.background = "#E8E8E8";
+		document.getElementById("navig").style.display="none";
+		document.getElementById("BrowserPage").style.display="none";
+		if (para==="all"){
+			document.getElementById("deleteallconfirm").style.display = "block";
+		} else {
+      document.getElementById("deleteoneconfirm").innerHTML = "<div class='center'><h2>Are You sure you want to delete this review?</h2>" +
+      "<button type='button' class='btn btn-outline-danger btn-lg' onclick='jumpback2(1," + para + ")'>Yes I'm sure</button>" +
+      "<button type='button' class='btn btn-outline-secondary btn-lg' onclick='jumpback2(0,0)'>wait a second</button></div>";
+
+			document.getElementById("deleteoneconfirm").style.display = "block";
+		}
+	}
+
+	function jumpback1(para) {
+		if (para==="deleteclick"){
+			if (document.getElementById("lastdelete1").value==="confirm") {
+				//console.log("delete array here");
+        Restaurants = [];
+        Reviews = [];
+        /////////////////
+
+				document.body.style.background = "#97D077";
+				document.getElementById("navig").style.display="block";
+				document.getElementById("BrowserPage").style.display="block";
+				document.getElementById("deleteallconfirm").style.display = "none";
+				document.getElementById("lastdelete1").value==="";
+        filteringreview();
+			} else {
+				alert("Need exact 'confirm' to be enter to clear all reviews");
+        document.getElementById("lastdelete1").value="";
+			}
+		}
+		else {
+			document.body.style.background = "#97D077";
+			document.getElementById("navig").style.display="block";
+			document.getElementById("BrowserPage").style.display="block";
+			document.getElementById("deleteallconfirm").style.display = "none";
+		}
+	}
+  function checkdeletingrows(){
+    document.getElementById("thelongbutton").innerHTML="<button type='button' class='btn btn-danger btn-block' style='color:white;font-weight:bold;' onclick='deletingrows()'>Are tou sure to delete all the reviews below this restaurant?</button>" +
+    "<button type='button' class='btn btn-light btn-block' style='margin-top:1px;margin-bottom:20px;color:black;font-weight:bold;' onclick='canceldeletingrows()'>Cancel deletion</button>";
+  }
+  function canceldeletingrows(){
+    document.getElementById("thelongbutton").innerHTML="<button type='button' class='btn btn-warning btn-block' style='margin-bottom:20px;color:white;font-weight:bold;' onclick='checkdeletingrows()'>delete all</button>";
+  }
+  function deletingrows() {
+    console.log("deletingrows called");
+    var counterA=0;
+    var attr;
+
+      attr = document.getElementById("myrestname").value;
+      for (var xx of Restaurants) {
+        if (xx.name == attr) {
+          Restaurants.splice(counterA,1);
+          break;
+        }
+        counterA++;
+      }//Restaurant out, no need for re calculation for rate
+      counterA = 0;console.log("beginning: "+Reviews.length);
+      while (counterA < Reviews.length) {
+        if (Reviews[counterA].restaurant == attr) {
+          Reviews.splice(counterA, 1);
+          counterA = 0;
+          continue;
+        }
+        counterA++;
+      }
+
+    filteringreview();
+    //console.log(Reviews);
+  }
+  //////////////////////////////////////////////////////
+  function deletingoperation(arrID) {
+    /////
+    var x;
+    var iter = 0;
+    for (x of Reviews) {
+      if (x.id==arrID) {
+        Reviews.splice(iter,1);
+        break;
+      }
+      iter++;
+    }
+
+    var r;
+    var itertwo = 0;
+    for (r of Restaurants) {
+      if(r.name == x.restaurant) {break;}
+      itertwo++;
+    }
+    if ((r.numOfFood-1) == 0) {
+      Restaurants.splice(itertwo,1);
+    } else {
+      r.avgRate =  ((r.avgRate*r.numOfFood) - parseInt(x.rating))/(r.numOfFood-1);
+      r.avgPrice = ((r.avgPrice*r.numOfFood) - parseInt(x.price))/(r.numOfFood-1);
+    }
+    /////////////////////
+  }
+	function jumpback2(para, arrID) {
+		if (para===1){
+			//console.log("delete the review from array here with ID: " + arrID);
+      deletingoperation(arrID);
+      ////////////////////////////
+
+			document.body.style.background = "#97D077";
+			document.getElementById("navig").style.display="block";
+			document.getElementById("BrowserPage").style.display="block";
+			document.getElementById("deleteoneconfirm").style.display = "none";
+      filteringreview();
+		} else {
+			document.body.style.background = "#97D077";
+			document.getElementById("navig").style.display="block";
+			document.getElementById("BrowserPage").style.display="block";
+			document.getElementById("deleteoneconfirm").style.display = "none";
+		}
+	}
+    function repicc(){
+		  var onepic = document.getElementById("homeimg1").src.replace(/^.*[\\\/]/, '');
+		  var twopic = document.getElementById("homeimg2").src.replace(/^.*[\\\/]/, '');
+		  var threepic = document.getElementById("homeimg3").src.replace(/^.*[\\\/]/, '');
+		  if (onepic === "wendys1.jpg" && twopic === "baburrito1.jpg" && threepic === "popeyes1.jpg"){
+			  document.getElementById("homeimg1").src = "picture/mrGao1.jpg";
+			  document.getElementById("homeimg2").src = "picture/popeyes2.jpg";
+			  document.getElementById("homeimg3").src = "picture/baburrito1.jpg";
+		  } else if (onepic === "mrGao1.jpg" && twopic === "popeyes2.jpg" && threepic === "baburrito1.jpg"){
+			  document.getElementById("homeimg1").src = "picture/popeyes2.jpg";
+			  document.getElementById("homeimg2").src = "picture/popeyes1.jpg";
+			  document.getElementById("homeimg3").src = "picture/wendys1.jpg";
+		  } else {
+			  document.getElementById("homeimg1").src = "picture/wendys1.jpg";
+			  document.getElementById("homeimg2").src = "picture/baburrito1.jpg";
+			  document.getElementById("homeimg3").src = "picture/popeyes1.jpg";
+		  }
+	  }
+    function gotocreate() {
+      if (pageNowIn == "CreateReview") return;
+			else{
+        document.getElementById("lk01").style="color:red;";
+        document.getElementById("lk02").style="color:white;";
+        document.getElementById("lk03").style="color:white;";
+        document.body.style.background = "#97D077";
+        document.getElementById("HomePage").style = "display:none;";
+        document.getElementById("clearallbtn").style = "display:none;";
+		document.getElementById("SearchRestaurantPage").style = "display:none;";
+				pageNowIn = "CreateReview";
+				mode = "InCreate";
+				document.getElementById("CreateReviewPage").style = "display:block";
+				initCreateReviewPage();
+				document.getElementById("createReview").value = "Create Review";
+			}
+    }
+    function gotobrowser() {
+      if (pageNowIn == "BroweReview") /*no action*/return; //or refresh the page;
+			else {
+        document.getElementById("lk01").style="color:white;";
+        document.getElementById("lk02").style="color:red;";
+        document.getElementById("lk03").style="color:white;";
+
+        document.body.style.background = "#97D077";
+        document.getElementById("HomePage").style = "display:none;";
+        document.getElementById("BrowserPage").style = "display:block;";
+        document.getElementById("clearallbtn").style = "float:right;display:block;";
+
+				pageNowIn = "BroweReview";
+				document.getElementById("CreateReviewPage").style = "display:none;";
+				document.getElementById("SearchRestaurantPage").style = "display:none;";
+        myfoodlist=[];
+        for (var i of Reviews) {
+          if (!myfoodlist.includes(i.food)) myfoodlist.push(i.food);
+        }
+			}
+    }
+    function filteringreview() {
+      var filterindex = document.getElementsByName("chosenoption");
+      var filterpara;
+      var zz;
+      var templist = [];
+
+      var demotable = "";
+      if (filterindex[0].checked) {
+        filterpara = document.getElementById("myrestname").value;
+        for (zz of Reviews) {
+          if (filterpara == zz.restaurant) {
+            templist.push(zz);
+          }
+        }
+        if (templist.length!=0) {
+          document.getElementById("thelongbutton").innerHTML="<button type='button' class='btn btn-warning btn-block' style='margin-bottom:20px;color:white;font-weight:bold;' onclick='checkdeletingrows()'>delete all</button>";
+          document.getElementById("thelongbutton").style="display:block;";
+        } else {
+          document.getElementById("thelongbutton").style="display:none;";
+        }
+        document.getElementById("sortby").innerHTML="<b>Restaurant-"+ filterpara +"</b>";
+      } else if (filterindex[1].checked) {
+        document.getElementById("thelongbutton").style="display:none;";
+        filterpara = document.getElementById("mycuisine").value;
+        for (zz of Reviews) {
+          if (filterpara == zz.cuisine) {
+            templist.push(zz);
+          }
+        }
+        document.getElementById("sortby").innerHTML="<b>cuisine-"+ filterpara +"</b>";
+      } else if (filterindex[2].checked) {
+        document.getElementById("thelongbutton").style="display:none;";
+        filterpara = document.getElementById("myrate").value;
+        for (zz of Reviews) {
+          if (filterpara == zz.rating) {
+            templist.push(zz);
+          }
+        }
+      } else if (filterindex[3].checked) {
+        filterpara = document.getElementById("myfoodname").value;
+        for (zz of Reviews) {
+          if (filterpara == zz.food) {
+            templist.push(zz);
+          }
+        }
+        document.getElementById("thelongbutton").style="display:none;";
+
+        document.getElementById("sortby").innerHTML="<b>food-"+ filterpara +"</b>";
+      } else if (filterindex[4].checked) {
+        document.getElementById("thelongbutton").style="display:none;";
+        filterpara = document.getElementById("myfoodprice").value;
+        if (filterpara==1) {
+          for (zz of Reviews) {
+            if (zz.price < 10) {
+              templist.push(zz);
+            }
+          }
+        }
+        else if (filterpara==2) {
+          for (zz of Reviews) {
+            if (zz.price < 15 && zz.price >=10) {
+              templist.push(zz);
+            }
+          }
+        }
+        else if (filterpara==3) {
+          for (zz of Reviews) {
+            if (zz.price < 20 && zz.price >=15) {
+              templist.push(zz);
+            }
+          }
+        }
+        else {
+          for (zz of Reviews) {
+            if (zz.price >=20) {
+              templist.push(zz);
+            }
+          }
+        }
+        document.getElementById("sortby").innerHTML="<b>Price</b>";
+      } else {
+        document.getElementById("thelongbutton").style="display:none;";
+        filterpara = document.getElementById("myorderdate").value;
+        for (zz of Reviews) {
+          if (filterpara == zz.dateCreated) {
+            templist.push(zz);
+          }
+        }
+        document.getElementById("sortby").innerHTML="<b>Time</b>";
+      }
+      if (templist.length<=0) {
+        document.getElementById("demo").innerHTML = "<h1>whoops, nothing here. :( </h1>"
+      } else {
+        var i;
+        var printrate;
+        var printpic;
+        for (var tt of templist){
+          i = 1;
+          printrate = "<span class='fa fa-star' style='color:yellow;margin-left:20%;'></span>";
+          while (i<5) {
+            if (i<tt.rating) {printrate = printrate + "<span class='fa fa-star' style='color:yellow;'></span>";}
+            else {printrate = printrate + "<span class='fa fa-star'></span>";}
+            i++;
+          }
+
+
+          if(tt.picture==""){printpic = "</div></div>";}
+          else {printpic = "<img src='picture/" + tt.picture + "' class='col-lg-4 col-xl-4 col-md-4' style='margin-top:20px;width:250px;height:180px;float:right;left:60%;'></div></div>";}
+          demotable = demotable + "<div style='margin-left:10px;margin-top:10px;' class='col-lg-8 col-xl-8 col-md-8' id='" + tt.id + "'>" +
+          "<button type='button' class='btn btn-dark btn-sm'  onclick='deleteallfunc(" + tt.id + ")'><b>Delete</b></button>" +
+          "<button type='button' class='btn btn-info btn-sm'  onclick='editfunc(" + tt.id + ")'><b>~Edit~</b></button>" + printrate +
+          "<div class='searchingresult'><div class='resulttop' style='float:left;'>" + tt.food + "</div>" +
+          "<div class='resulttop' style='float:right;background-color:green;'>" + tt.restaurant + "</div><div class='resultcontext'>" + tt.comment + "</div>" +
+          "<div class='resultbot' style='left:0';> $" + tt.price + "</div><div class='resultbot' style='right:0;'>" + tt.cuisine + "</div>" +
+          "<div class='resultbot' style='left:50%;font-weight:normal;'>" + tt.dateCreated + "</div>" + printpic;
+          document.getElementById("demo").innerHTML = demotable;
+
+        }
+      }
+    }
+    function editfunc(arrID){
+      console.log("edit function success!");
+      document.getElementById("navig").style.display="none";
+      document.getElementById("moding").innerHTML = "<b>( Edit Mode )</b>"
+      var arr;
+      var edittel;
+      for (arr of Reviews) {
+        if (arr.id == arrID) {break;}
+      }
+      for (var tempvar of Restaurants){
+        if (arr.restaurant == tempvar.name) {edittel=tempvar.teleNum;break;}
+      }
+      console.log(arr.picture);
+      deletingoperation(arr.id);
+      mode="InEdit";
+      document.getElementById("BrowserPage").style = "display:none;";
+      document.getElementById("CreateReviewPage").style = "display:block";
+      if (Restaurants.length == 0){
+          document.getElementById("registeredRestaurantsDiv").style = "display:none";
+          document.getElementById("registeredRestaurants").innerHTML = restOptStr;
+          document.getElementById("registeredRestaurantsDiv").value = "newRestaurant";
+          document.getElementById("restaurantNameInputDiv").style = "display:block";
+          document.getElementById("restaurantNameInput").value = arr.restaurant;
+          document.getElementById("restaurantNameInput").classList = "form-control";
+          document.getElementById("restaurantNameInputFeedback").classList = "invalid-feedback";
+          document.getElementById("restaurantNameInputFeedback").innerHTML = "";
+        } else {
+          document.getElementById("registeredRestaurantsDiv").style = "display:block";
+          restOptStr = getRestOptionStr();
+          document.getElementById("registeredRestaurants").innerHTML = restOptStr;
+          document.getElementById("registeredRestaurantsDiv").value = "newRestaurant";
+          document.getElementById("restaurantNameInputDiv").style = "display:block";
+          document.getElementById("restaurantNameInput").value = arr.restaurant;
+          document.getElementById("restaurantNameInput").classList = "form-control";
+          document.getElementById("restaurantNameInputFeedback").classList = "invalid-feedback";
+          document.getElementById("restaurantNameInputFeedback").innerHTML = "";
+        }
+
+
+      document.getElementById("foodNameInput").value = arr.food;
+			document.getElementById("foodNameInput").classList = "form-control";
+			document.getElementById("foodNameInputFeedback").classList = "invalid-feedback";
+			document.getElementById("foodNameInputFeedback").innerHTML = "";
+
+			document.getElementById("foodPriceInput").value = arr.price;
+			document.getElementById("foodPriceInput").classList = "form-control";
+			document.getElementById("foodPriceInputFeedback").classList = "invalid-feedback";
+			document.getElementById("foodPriceInputFeedback").innerHTML = "";
+
+			document.getElementById("restaurantTeleInput").value = edittel;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			document.getElementById("restaurantTeleInput").classList = "form-control";
+			document.getElementById("restaurantTeleInputFeedback").classList = "invalid-feedback";
+			document.getElementById("restaurantTeleInputFeedback").innerHTML = "";
+
+			document.getElementById("foodCuisineInput").value = arr.cuisine;
+
+			document.getElementById("foodCommentInput").value = arr.comment;
+			document.getElementById("foodCommentInput").classList = "form-control";
+			document.getElementById("foodCommentInputFeedback").classList = "invalid-feedback";
+			document.getElementById("foodCommentInputFeedback").innerHTML = "";
+
+			document.getElementById("foodPictureInputLabel").innerHTML= "Attatch new picture for the food";
+			document.getElementById("showPictureInput").innerHTML = "";
+      document.getElementById("foodPictureInput").value= null; //arr.picture;
+
+      if (arr.rating=="1") {document.getElementById("ratingOne").checked = true;}
+      else if (arr.rating=="2") {document.getElementById("ratingTwo").checked = true;}
+      else if (arr.rating=="3") {document.getElementById("ratingThree").checked = true;}
+      else if (arr.rating=="4") {document.getElementById("ratingFour").checked = true;}
+      else {document.getElementById("ratingFive").checked = true;}
+
+			document.getElementById("status").style = "display:none";
+			document.getElementById("status").innerHTML = "";
+
+			document.getElementById("finishCreationButtons").style = "display:none";
+
+
+
+    }
+	
+	
+	
+		function gotosearch(){
+			pageNowIn = "SearchRestaurant";
+			document.getElementById("lk01").style="color:white;";
+			document.getElementById("lk02").style="color:white;";
+			document.getElementById("lk03").style="color:red;";
+				
+			document.body.style.background = "#97D077";
+			document.getElementById("CreateReviewPage").style = "display:none";
+			document.getElementById("HomePage").style = "display:none;";
+			document.getElementById("BrowserPage").style = "display:none;";
+			document.getElementById("clearallbtn").style = "display:none;";
+			document.getElementById("SearchRestaurantPage").style = "display:block";
+			document.getElementById("CreateReviewPage").style = "display:none;";
+			//code initializes Search Restaurant page
+			initSearchRestaurantPage()
+
+		}
+
+		restOptStr = getRestOptionStr();
+
+
+
+		document.getElementById("homeNav").onclick = function(){
+			if (pageNowIn == "Home") /*no action*/return //or refresh the page;
+			else {
+				document.getElementById("lk01").style="color:white;";
+				document.getElementById("lk02").style="color:white;";
+				document.getElementById("lk03").style="color:white;";
+
+				pageNowIn = "Home";
+				document.getElementById("CreateReviewPage").style = "display:none";
+				document.body.style.background = "#003333";
+				document.getElementById("HomePage").style = "display:block;";
+				document.getElementById("BrowserPage").style = "display:none;";
+				document.getElementById("clearallbtn").style = "display:none;";
+				document.getElementById("SearchRestaurantPage").style = "display:none";
+        ////////////////////////////
+			}
+		}
+
+		document.getElementById("createReviewNav").onclick = function(){
+			if (pageNowIn == "CreateReview") return;
+			else{
+				document.getElementById("lk01").style="color:red;";
+				document.getElementById("lk02").style="color:white;";
+				document.getElementById("lk03").style="color:white;";
+
+				document.body.style.background = "#97D077";
+				document.getElementById("HomePage").style = "display:none;";
+				document.getElementById("BrowserPage").style = "display:none;";
+				document.getElementById("clearallbtn").style = "display:none;";
+				document.getElementById("SearchRestaurantPage").style = "display:none";
+				
+				pageNowIn = "CreateReview";
+				mode = "InCreate";
+				document.getElementById("CreateReviewPage").style = "display:block";
+				/*document.getElementById("foodPictureInputLabel").innerHTML= "Attatch picture of the food";
+				document.getElementById("showPictureInput").innerHTML = "";
+				document.getElementById("createReview").value = "Create Review";
+
+				if (Restaurants.length == 0){
+					document.getElementById("registeredRestaurantsDiv").style = "display:none";
+					document.getElementById("restaurantNameInputDiv").style = "display:block";
+				}
+				else{
+					document.getElementById("registeredRestaurantsDiv").style = "display:block";
+					document.getElementById("registeredRestaurantsDiv").value = "newRestaurant";
+					document.getElementById("restaurantNameInputDiv").style = "display:block";
+					document.getElementById("registeredRestaurants").innerHTML = restOptStr;
+				}*/
+				initCreateReviewPage();
+				document.getElementById("createReview").value = "Create Review";
+			}
+
+		}
+
+		document.getElementById("browseReviewNav").onclick = function(){
+			if (pageNowIn == "BroweReview") /*no action*/return //or refresh the page;
+			else {
+				document.getElementById("lk01").style="color:white;";
+				document.getElementById("lk02").style="color:red;";
+				document.getElementById("lk03").style="color:white;";
+
+				document.body.style.background = "#97D077";
+				document.getElementById("HomePage").style = "display:none;";
+				document.getElementById("BrowserPage").style = "display:block;";
+				document.getElementById("clearallbtn").style = "float:right;display:block;";
+				document.getElementById("SearchRestaurantPage").style = "display:none";
+				document.getElementById("CreateReviewPage").style = "display:none;";
+
+				pageNowIn = "BroweReview";
+				
+				//code initializes Browse Review page
+        myfoodlist=[];
+        for (var i of Reviews) {
+          if (!myfoodlist.includes(i.food)) myfoodlist.push(i.food);
+        }
+        //////////////////////////
+			}
+		}
+
+		document.getElementById("searchRestaurantNav").onclick = function(){
+			if (pageNowIn == "SearchRestaurant") /*no action*/return //or refresh the page;
+			else {
+				pageNowIn = "SearchRestaurant";
+				document.getElementById("lk01").style="color:white;";
+				document.getElementById("lk02").style="color:white;";
+				document.getElementById("lk03").style="color:red;";
+				
+				document.body.style.background = "#97D077";
+				document.getElementById("CreateReviewPage").style = "display:none";
+				document.getElementById("HomePage").style = "display:none;";
+				document.getElementById("BrowserPage").style = "display:none;";
+				document.getElementById("clearallbtn").style = "display:none;";
+				document.getElementById("SearchRestaurantPage").style = "display:block";
+				document.getElementById("CreateReviewPage").style = "display:none;";
+				//code initializes Search Restaurant page
+				initSearchRestaurantPage()
+			}
+		}
+
+
+
+		document.getElementById("registeredRestaurants").onchange = function(){
+			if (document.getElementById("registeredRestaurants").value == "newRestaurant"){
+				document.getElementById("restaurantNameInputDiv").style = "display:block";
+				document.getElementById("restaurantTeleInput").value = "";
+			}
+			else{
+				document.getElementById("restaurantNameInputDiv").style = "display:none";
+				chosen = document.getElementById("registeredRestaurants").value;
+				var r;
+				for (r of Restaurants){
+						if(r.name == chosen){
+							break;
+						}
+					}
+				document.getElementById("restaurantTeleInput").value = r.teleNum;
+			}
+
+		}
+
+		document.getElementById("foodPictureInput").onchange = function(){
+			picPath = '"' + document.getElementById("foodPictureInput").value + '"';
+			lastSlash = picPath.lastIndexOf("\\");
+			picName = picPath.slice(lastSlash+1, picPath.length-1)
+			if (picPath == '""'){
+				document.getElementById("foodPictureInputLabel").innerHTML= "Attatch picture of the food";
+				document.getElementById("showPictureInput").innerHTML = "";
+			}
+			else {
+				document.getElementById("foodPictureInputLabel").innerHTML = document.getElementById("foodPictureInput").value;
+				document.getElementById("showPictureInput").innerHTML = "<img id=foodPictureSelected" + ' src= "picture/' + picName + '" width = 450 height = 450 />'
+			}
+		}
+
+		document.getElementById("restaurantNameInput").onkeyup = function()
+		{
+			restaurantName = document.getElementById("restaurantNameInput").value;
+			if (restaurantName.length == 0){
+				document.getElementById("restaurantNameInput").classList = "form-control is-invalid";
+				document.getElementById("restaurantNameInputFeedback").classList = "invalid-feedback";
+				document.getElementById("restaurantNameInputFeedback").innerHTML = "Please give a name of the restaurant";
+			}
+			else {
+				document.getElementById("restaurantNameInput").classList = "form-control is-valid";
+				document.getElementById("restaurantNameInputFeedback").classList = "valid-feedback";
+				document.getElementById("restaurantNameInputFeedback").innerHTML = "Restaurant Name Gotten!";
+			}
+		}
+
+		document.getElementById("foodNameInput").onkeyup = function()
+		{
+			foodName = document.getElementById("foodNameInput").value;
+			if (foodName.length == 0){
+				document.getElementById("foodNameInput").classList = "form-control is-invalid";
+				document.getElementById("foodNameInputFeedback").classList = "invalid-feedback";
+				document.getElementById("foodNameInputFeedback").innerHTML = "Please give a name of the food";
+			}
+			else {
+				document.getElementById("foodNameInput").classList = "form-control is-valid";
+				document.getElementById("foodNameInputFeedback").classList = "valid-feedback";
+				document.getElementById("foodNameInputFeedback").innerHTML = "Food Name Gotten!";
+			}
+		}
+
+		document.getElementById("foodPriceInput").onkeyup = function()
+		{
+			foodPrice = document.getElementById("foodPriceInput").value;
+			if (foodPrice == null){
+				document.getElementById("foodPriceInput").classList = "form-control is-invalid";
+				document.getElementById("foodPriceInputFeedback").classList = "invalid-feedback";
+				document.getElementById("foodPriceInputFeedback").innerHTML = "Please give the price of the food";
+			}
+			else if (foodPrice <= 0){
+				document.getElementById("foodPriceInput").classList = "form-control is-invalid";
+				document.getElementById("foodPriceInputFeedback").classList = "invalid-feedback";
+				document.getElementById("foodPriceInputFeedback").innerHTML = "Price of food invalid, please give a positive number as the price.";
+			}
+			else {
+				document.getElementById("foodPriceInput").classList = "form-control is-valid";
+				document.getElementById("foodPriceInputFeedback").classList = "valid-feedback";
+				document.getElementById("foodPriceInputFeedback").innerHTML = "Food Price Gotten!";
+			}
+		}
+
+		document.getElementById("restaurantTeleInput").onkeyup = function()
+		{
+			teleNumber = document.getElementById("restaurantTeleInput").value;
+			if (teleNumber == null){
+				document.getElementById("restaurantTeleInput").classList = "form-control is-invalid";
+				document.getElementById("restaurantTeleInputFeedback").classList = "invalid-feedback";
+				document.getElementById("restaurantTeleInputFeedback").innerHTML = "Please enter the telephone number of the restaurant";
+			}
+			else if (teleNumber < 1000000000 || teleNumber > 9999999999){
+				document.getElementById("restaurantTeleInput").classList = "form-control is-invalid";
+				document.getElementById("restaurantTeleInputFeedback").classList = "invalid-feedback";
+				document.getElementById("restaurantTeleInputFeedback").innerHTML = "Phone number invalid, please enter a 10-digit phone number.";
+			}
+			else {
+				document.getElementById("restaurantTeleInput").classList = "form-control is-valid";
+				document.getElementById("restaurantTeleInputFeedback").classList = "valid-feedback";
+				document.getElementById("restaurantTeleInputFeedback").innerHTML = "Food Price Gotten!";
+			}
+		}
+
+
+		function initCreateReviewPage(){
+
+			if (Restaurants.length == 0){
+					document.getElementById("registeredRestaurantsDiv").style = "display:none";
+					document.getElementById("registeredRestaurants").innerHTML = restOptStr;
+					document.getElementById("registeredRestaurantsDiv").value = "newRestaurant";
+					document.getElementById("restaurantNameInputDiv").style = "display:block";
+					document.getElementById("restaurantNameInput").value = "";
+					document.getElementById("restaurantNameInput").classList = "form-control";
+					document.getElementById("restaurantNameInputFeedback").classList = "invalid-feedback";
+					document.getElementById("restaurantNameInputFeedback").innerHTML = "";
+				}
+			else{
+					document.getElementById("registeredRestaurantsDiv").style = "display:block";
+					restOptStr = getRestOptionStr();
+					document.getElementById("registeredRestaurants").innerHTML = restOptStr;
+					document.getElementById("registeredRestaurantsDiv").value = "newRestaurant";
+					document.getElementById("restaurantNameInputDiv").style = "display:block";
+					document.getElementById("restaurantNameInput").value = "";
+					document.getElementById("restaurantNameInput").classList = "form-control";
+					document.getElementById("restaurantNameInputFeedback").classList = "invalid-feedback";
+					document.getElementById("restaurantNameInputFeedback").innerHTML = "";
+
+			}
+
+
+
+			document.getElementById("foodNameInput").value = "";
+			document.getElementById("foodNameInput").classList = "form-control";
+			document.getElementById("foodNameInputFeedback").classList = "invalid-feedback";
+			document.getElementById("foodNameInputFeedback").innerHTML = "";
+
+			document.getElementById("foodPriceInput").value = null;
+			document.getElementById("foodPriceInput").classList = "form-control";
+			document.getElementById("foodPriceInputFeedback").classList = "invalid-feedback";
+			document.getElementById("foodPriceInputFeedback").innerHTML = "";
+
+			document.getElementById("restaurantTeleInput").value = null;
+			document.getElementById("restaurantTeleInput").classList = "form-control";
+			document.getElementById("restaurantTeleInputFeedback").classList = "invalid-feedback";
+			document.getElementById("restaurantTeleInputFeedback").innerHTML = "";
+
+			document.getElementById("foodCuisineInput").value = "Unknown";
+
+			document.getElementById("foodCommentInput").value = "";
+			document.getElementById("foodCommentInput").classList = "form-control";
+			document.getElementById("foodCommentInputFeedback").classList = "invalid-feedback";
+			document.getElementById("foodCommentInputFeedback").innerHTML = "";
+
+			document.getElementById("foodPictureInputLabel").innerHTML= "Attatch picture of the food";
+			document.getElementById("showPictureInput").innerHTML = "";
+      document.getElementById("foodPictureInput").value= null;
+
+			document.getElementById("ratingFive").checked = true;
+
+			document.getElementById("status").style = "display:none";
+			document.getElementById("status").innerHTML = "";
+
+			document.getElementById("finishCreationButtons").style = "display:none";
+		}
+
+		document.getElementById("reset").onclick = function()
+		{
+			if(mode == "InCreate"){
+				initCreateReviewPage();
+				document.getElementById("createReview").value = "Create Review";
+			}
+			else if(mode == "FinishCreate"){
+				document.getElementById("status").classList = "alert alert-danger";
+				document.getElementById("status").innerHTML = "Current creation is finished! Please click one of the two buttons below to start new creation or jump to Browse Review Page.";
+			}
+      else if(mode == "InEdit"){
+        alert("The reset button has been disabled in edit mode.");
+      }
+
+
+		}
+
+		document.getElementById("createReview").onclick = function()
+		{
+			document.getElementById("status").style = "display:block";
+
+			if (mode == "InCreate" || mode == "InEdit"){
+				if (document.getElementById("registeredRestaurants").value != "newRestaurant"){
+					console.log("in select")
+					restaurantName = document.getElementById("registeredRestaurants").value;
+				}
+				else {
+					restaurantName = document.getElementById("restaurantNameInput").value;
+				}
+
+				restaurantTele = document.getElementById("restaurantTeleInput").value;
+
+				foodName = document.getElementById("foodNameInput").value;
+
+				foodPrice = document.getElementById("foodPriceInput").value;
+
+				foodCuisine = document.getElementById("foodCuisineInput").value;
+
+				foodComment = document.getElementById("foodCommentInput").value;
+
+				ratings = document.getElementsByName("ratingButton");
+
+				var foodRating;
+
+				for(var i = 0; i < ratings.length; i++){
+					if(ratings[i].checked){
+						foodRating = ratings[i].value;
+					}
+				}
+				if (restaurantName.length > 0 && foodName.length > 0 && foodPrice > 0
+					&& (restaurantTele == "" || (parseInt(restaurantTele) >= 1000000000 && parseInt(restaurantTele) <= 9999999999)))
+				{
+					document.getElementById("status").classList = "alert alert-success";
+					newReviewID++;
+					var newReview = {id: newReviewID, restaurant: "", food: "", price: 0, comment: "", cuisine: "Unknown", rating: 0, picture: "", dateCreated:"" };
+					newReview.restaurant = restaurantName;
+					newReview.food = foodName;
+					newReview.price = foodPrice;
+					newReview.comment = foodComment;
+					newReview.cuisine = foodCuisine;
+					newReview.rating = foodRating;
+					var now = new Date();
+					newReview.dateCreated = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate();//                                      change made here
+					picPath = '"' + document.getElementById("foodPictureInput").value + '"';
+					console.log(picPath == '""');
+					lastSlash = picPath.lastIndexOf("\\");
+					if (picPath == '""') newReview.picture = "";
+					else newReview.picture = picPath.slice(lastSlash+1, picPath.length-1);
+
+					Reviews.push(newReview);
+
+					notRegistered = true;
+					var r;
+					for (r of Restaurants){
+						if(r.name == restaurantName){
+							notRegistered = false;
+							break;
+						}
+					}
+					if (notRegistered) {
+						newRestaurant = {name: restaurantName,
+										teleNum: restaurantTele ,
+										avgRate: parseInt(foodRating),
+										avgPrice: parseInt(foodPrice),
+										numOfFood: 1,
+										lastAttended: now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate()}//                                      change made here
+						Restaurants.push(newRestaurant);
+
+					}
+					else{
+						r.teleNum =  restaurantTele;
+						r.avgRate = ((r.avgRate*r.numOfFood) + parseInt(foodRating))/(r.numOfFood+1);
+						r.avgPrice = ((r.avgPrice*r.numOfFood) + parseInt(foodPrice))/(r.numOfFood+1);
+						r.numOfFood = r.numOfFood + 1;
+						r.lastAttended = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate();//                                      change made here
+					}
+
+					console.log(Restaurants);
+					console.log(Reviews)
+
+          /*var ww;
+          for (ww of foodlist){
+            if ()
+          }*/                                                                               ///////                                InEdit mode added
+          if (mode=="InEdit") {
+            document.getElementById("moding").innerHTML="";
+            document.getElementById("navig").style.display="block";
+            document.getElementById("BrowserPage").style.display="block";
+            document.getElementById("CreateReviewPage").style.display="none";
+            mode = "FinishCreate";
+            filteringreview();
+          } else {
+            document.getElementById("status").innerHTML = "Review Created successfully! Create another food review or jump to Browser Review page?";
+  					document.getElementById("finishCreationButtons").style = "display:block";
+  					mode = "FinishCreate";
+          }
+				}
+
+				else if(restaurantName.length == 0)
+				{
+					document.getElementById("status").classList = "alert alert-danger";
+					document.getElementById("status").innerHTML =
+					"Please give the name of the restaurant!";
+				}
+				else if(foodName.length == 0)
+				{
+					document.getElementById("status").classList = "alert alert-danger";
+					document.getElementById("status").innerHTML =
+					"Please give the name of the food!";
+				}
+				else if(foodPrice == null)
+				{
+					document.getElementById("status").classList = "alert alert-danger";
+					document.getElementById("status").innerHTML =
+					"Please give the name of the food!";
+				}
+				else if(foodPrice <= 0){
+					document.getElementById("status").classList = "alert alert-danger";
+					document.getElementById("status").innerHTML =
+					"Food price invalid, creation of new review failed.";
+				}
+				else if(restaurantTele != "" && (parseInt(restaurantTele) < 1000000000 || parseInt(restaurantTele) > 9999999999)){
+					document.getElementById("status").classList = "alert alert-danger";
+					document.getElementById("status").innerHTML =
+					"Restaurant phone number invalid, creation of new review failed.";
+				}
+			}
+			else if (mode == "FinishCreate"){
+				document.getElementById("status").classList = "alert alert-danger";
+				document.getElementById("status").innerHTML = "Current creation is finished! Please click one of the two buttons below to start new creation or jump to Browse Review Page.";
+
+			}
+
+		}
+
+		document.getElementById("createAnotherReview").onclick = function(){
+			if (mode == "FinishCreate"){
+				mode = "InCreate";
+				initCreateReviewPage()
+				document.getElementById("createReview").value = "Create Review";
+
+			}
+		}
+
+		/*document.getElementById("toBrowseReview").onclick = function(){
+			if (mode == "FinishCreate"){
+				mode = "NotInCreate"
+				pageNowIn = "BroweReview";
+				document.getElementById("CreateReviewPage").style = "display:none";
+				//code initializes Browse Review page
+
+			}
+
+		}*/
+    ////////////////////////////////////////////////////////////////////////////////////                        Added function for input suggestion
+    document.getElementById("myrestname").onclick = function(){
+      var suggestres = '';
+      for (var i of Restaurants) {
+        suggestres = suggestres + '<option value=' + i.name + ' />';
+      }
+      document.getElementById("myresnamelist").innerHTML = suggestres;
+    }
+    document.getElementById("myfoodname").onclick = function() {
+      var suggestres = '';
+      for (var i of myfoodlist) {
+        suggestres = suggestres + '<option value=' + i + ' />';
+      }
+      document.getElementById("myfoodnamelist").innerHTML = suggestres;
+    }
+    ///////////////////////////////////////////////////
+	
+	///////////////////////////////////////////////////////////////////////////////////// JS script for Search Restaurants page
+		function genRestaurantTableStr(restaurantList){
+			tableBodyStr = "";
+			var r;
+			for (r of restaurantList) {
+				if (r.teleNum != ""){
+					teleStr = r.teleNum;
+				}
+				else{
+					teleStr = "No phone number has been provided"
+				}
+				tableBodyStr = tableBodyStr
+								+"<tr>"
+								+'<th scope="row">'+ r.name + "</th>"
+								+"<td>"+ r.lastAttended + "</td>"
+								+"<td>"+ r.avgPrice + "</td>"
+								+"<td>"+ r.avgRate + "</td>"
+								+"<td>"+ '<a class="btn btn-primary" role="button" href="tel:' + teleStr + '">' + teleStr + "</a>" + "</td>"
+								+"<td>"+ '<a class="btn btn-primary" role="button" href="https://www.ubereats.com/ca" style="font-size:small"> Jump To UberEats </a>' + "</td>"
+								+"</tr>";
+			}
+			return tableBodyStr;
+		
+		}
+		
+		function initSearchRestaurantPage(){
+			document.getElementById("avgPriceInput").value = null;
+			document.getElementById("lastAttendedInput").value = null;
+			console.log(Restaurants);
+			if (Restaurants.length == 0){
+				document.getElementById("searchRestMethodInput").value = "Search By Restaurant's Name";
+				document.getElementById("restaurantsInSearchDiv").style = "display:block";
+				document.getElementById("avgPriceInputDiv").style = "display:none";
+				document.getElementById("lastAttendedInputDiv").style = "display:none";
+				document.getElementById("restaurantsInSearch").innerHTML = "";
+				document.getElementById("restaurantTableBody").innerHTML = "";
+			}
+			else{
+				document.getElementById("searchRestMethodInput").value = "Search By Restaurant's Name";
+				document.getElementById("restaurantsInSearchDiv").style = "display:block";
+				document.getElementById("avgPriceInputDiv").style = "display:none";
+				document.getElementById("lastAttendedInputDiv").style = "display:none";
+				Restaurants.sort(compareRestaurant);
+				filteredRestaurants = [];
+				for(r of Restaurants){
+					console.log(r);
+					let tempRestaurant= JSON.parse(JSON.stringify(r));
+					filteredRestaurants.push(tempRestaurant);
+				}
+				restOptStr = getRestOptionStr();
+				searchRestOpt = restOptStr.slice(52,restOptStr.length-1);
+				document.getElementById("restaurantsInSearch").innerHTML = searchRestOpt;
+				
+				tableBodyStr = genRestaurantTableStr(Restaurants);
+				document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+			}
+		}
+		
+		document.getElementById("searchRestMethodInput").onchange = function(){
+			if (document.getElementById("searchRestMethodInput").value == "Search By Restaurant's Name"){
+				document.getElementById("restaurantsInSearchDiv").style = "display:block";
+				document.getElementById("avgPriceInputDiv").style = "display:none";
+				document.getElementById("lastAttendedInputDiv").style = "display:none";
+			}
+			else if (document.getElementById("searchRestMethodInput").value == "Search By Restaurant's Average Price"){
+				document.getElementById("restaurantsInSearchDiv").style = "display:none";
+				document.getElementById("avgPriceInputDiv").style = "display:block";
+				document.getElementById("lastAttendedInputDiv").style = "display:none";
+			}
+			else{
+				document.getElementById("restaurantsInSearchDiv").style = "display:none";
+				document.getElementById("avgPriceInputDiv").style = "display:none";
+				document.getElementById("lastAttendedInputDiv").style = "display:block";
+			}
+		}
+		
+		function compareRestaurant(restA,restB){
+			if (document.getElementById("searchRestMethodInput").value == "Search By Restaurant's Name"){
+				nameA = restA.name.toLowerCase();
+				nameB = restB.name.toLowerCase();
+				if(nameA > nameB){
+					return 1;
+				}
+				else if(nameA < nameB){
+					return -1;
+				}
+				else{
+					if(restA.avgRate > restB.avgRate){
+						return -1;
+					}
+					if(restA.avgRate < restB.avgRate){
+						return 1;
+					}
+					else{return 0;}
+				
+				} 
+			}
+			else if (document.getElementById("searchRestMethodInput").value == "Search By Restaurant's Average Price"){
+				if(restA.avgPrice > restB.avgPrice){
+					return -1;
+				}
+				else if(restA.avgPrice < restB.avgPrice){
+					return 1;
+				}
+				else{
+					if(restA.avgRate > restB.avgRate){
+						return -1;
+					}
+					if(restA.avgRate < restB.avgRate){
+						return 1;
+					}
+					else{return 0;}
+				
+				} 
+			}
+			
+			else if (document.getElementById("searchRestMethodInput").value == "Search By Last Attended Date"){
+				if(restA.LastAttended > restB.LastAttended){
+					return -1;
+				}
+				else if(restA.LastAttended < restB.LastAttended){
+					return 1;
+				}
+				else{
+					if(restA.avgRate > restB.avgRate){
+						return -1;
+					}
+					if(restA.avgRate < restB.avgRate){
+						return 1;
+					}
+					else{return 0;}
+				
+				} 	
+			}
+			else {return 0;}
+		
+		}
+		
+		
+		document.getElementById("sortRestaurantsByRate").onclick = function(){
+			if (Restaurants.length == 0){
+			}
+			else{
+				filteredRestaurants.sort(function(restA,restB){
+					if(restA.avgRate > restB.avgRate){
+						return -1;
+					}
+					if(restA.avgRate < restB.avgRate){
+						return 1;
+					}
+					else{return 0;}
+				});
+				tableBodyStr = genRestaurantTableStr(filteredRestaurants);
+				document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+			}
+		}
+		
+		document.getElementById("startSearchRestaurant").onclick = function(){
+			if (document.getElementById("searchRestMethodInput").value == "Search By Restaurant's Name"){
+				filterValue = document.getElementById("restaurantsInSearch").value;
+				if (filterValue != ""){
+					filteredRestaurants = []
+					for(r of Restaurants){
+						if (r.name == filterValue){
+							tempRestaurant = JSON.parse(JSON.stringify(r))
+							filteredRestaurants.push(tempRestaurant);
+						}
+					}
+					filteredRestaurants.sort(compareRestaurant)
+					tableBodyStr = genRestaurantTableStr(filteredRestaurants);
+					document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+				}
+				else{
+					Restaurants.sort(compareRestaurant)
+					tableBodyStr = genRestaurantTableStr(Restaurants);
+					document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+				}
+			}
+			else if (document.getElementById("searchRestMethodInput").value == "Search By Restaurant's Average Price"){
+				filterValue = document.getElementById("avgPriceInput").value;
+				if (filterValue != ""){
+					filteredRestaurants = []
+					for(r of Restaurants){
+						if (r.avgPrice <= filterValue){
+							tempRestaurant = JSON.parse(JSON.stringify(r))
+							filteredRestaurants.push(tempRestaurant);
+						}
+					}
+					filteredRestaurants.sort(compareRestaurant)
+					tableBodyStr = genRestaurantTableStr(filteredRestaurants);
+					document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+				}
+				else{
+					Restaurants.sort(compareRestaurant)
+					tableBodyStr = genRestaurantTableStr(Restaurants);
+					document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+				}
+			}
+			else if(document.getElementById("searchRestMethodInput").value == "Search By Last Attended Date"){
+				document.getElementById("lastAttendedInputDiv").style = "display:block";
+				filterValue = document.getElementById("lastAttendedInput").value;
+				if (filterValue != ""){
+					filteredRestaurants = []
+					for(r of Restaurants){
+						if (r.lastAttended <= filterValue){
+							tempRestaurant = JSON.parse(JSON.stringify(r))
+							filteredRestaurants.push(tempRestaurant);
+						}
+					}
+					filteredRestaurants.sort(compareRestaurant)
+					tableBodyStr = genRestaurantTableStr(filteredRestaurants);
+					document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+				}
+				else{
+					Restaurants.sort(compareRestaurant)
+					tableBodyStr = genRestaurantTableStr(Restaurants);
+					document.getElementById("restaurantTableBody").innerHTML = tableBodyStr;
+				}
+			}
+			else{}
+		}
+		
+		document.getElementById("avgPriceInput").onkeyup = function(){
+			avgPriceSearch = document.getElementById("avgPriceInput").value;
+			if (avgPriceSearch == null){
+				document.getElementById("avgPriceInput").classList = "form-control is-invalid";          
+				document.getElementById("avgPriceInputFeedback").classList = "invalid-feedback";          
+				document.getElementById("avgPriceInputFeedback").innerHTML = "Please give the max average price of the restaurants you want to see";  
+			}
+			else if (avgPriceSearch <= 0){
+				document.getElementById("avgPriceInput").classList = "form-control is-invalid";     
+				document.getElementById("avgPriceInputFeedback").classList = "invalid-feedback";          
+				document.getElementById("avgPriceInputFeedback").innerHTML = "Be careful! You're entering a price not greater than 0.";
+			}
+			else {
+				document.getElementById("avgPriceInput").classList = "form-control is-valid";     
+				document.getElementById("avgPriceInputFeedback").classList = "valid-feedback";          
+				document.getElementById("avgPriceInputFeedback").innerHTML = "Valid Price Entered!";
+			}
+		}
+		
+		document.getElementById("lastAttendedInput").onchange = function(){
+			lastAttendedSearch = document.getElementById("lastAttendedInput").value;
+			now = new Date();
+			console.log(lastAttendedSearch);
+			if (lastAttendedSearch == null){
+				document.getElementById("lastAttendedInput").classList = "form-control is-invalid";          
+				document.getElementById("lastAttendedInputFeedback").classList = "invalid-feedback";          
+				document.getElementById("lastAttendedInputFeedback").innerHTML = "Please give the last attended date of the restaurants you want to see";  
+			}
+			else if (lastAttendedSearch > (now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate())){
+				console.log("invalid");
+				document.getElementById("lastAttendedInput").classList = "form-control is-invalid";     
+				document.getElementById("lastAttendedInputFeedback").classList = "invalid-feedback";          
+				document.getElementById("lastAttendedInputFeedback").innerHTML = "Be careful! You're entering a date greater than the date today.";
+			}
+			else {
+				document.getElementById("lastAttendedInput").classList = "form-control is-valid";     
+				document.getElementById("lastAttendedInputFeedback").classList = "valid-feedback";          
+				document.getElementById("lastAttendedInputFeedback").innerHTML = "Valid Date Entered!";
+			}
+		}
+		
+		document.getElementById("resetSearchRestaurantPage").onclick = function(){
+			initSearchRestaurantPage()
+		}
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+commit facf9761911502f6d70e192eb4c37fce640a7417
+Author: Shuo Zhang <zhans18@mcmaster.ca>
+Date:   Mon Nov 16 17:23:08 2020 -0500
+
+    a select all button added and some bug fixed
+
+commit 9bbb758dd5ae71e007b666ffff74478c4027cd88
+Author: Hongzhao Tan <tanh10@mcmaster.ca>
+Date:   Mon Nov 16 16:40:35 2020 -0500
+
+    Fix a bug in script of Search Restaurant Page
+
+commit 22a558577b552413f743818389c6c795945fe9fe
+Author: Hongzhao Tan <tanh10@mcmaster.ca>
+Date:   Mon Nov 16 15:59:59 2020 -0500
+
+    Implementation for Search Restaurants Page
+
+commit eb21a17f424c08859d3df8a769eb1335257c0a60
+Author: Shuo Zhang <zhans18@mcmaster.ca>
+Date:   Mon Nov 16 06:19:41 2020 -0500
+
+    code in indexxx.html
+
+commit f2fa80d2249208c309c1d45a44bca4242e63b06f
+Author: Hongzhao Tan <tanh10@mcmaster.ca>
+Date:   Sat Nov 14 23:38:47 2020 -0500
+
+    add properties to Restaurants, add id to Reviews, add Restaurant telephone number input in Create Review Page
+
+commit c769d62e195a5c4475cd19ee9a3e84674d3ee2b1
+Author: Hongzhao Tan <tanh10@mcmaster.ca>
+Date:   Sat Nov 14 19:11:51 2020 -0500
+
+    Implementation for Create New Food Review page
+
+commit 6d64da96ddf351c56778b2c98bbafcdd9423d0f2
+Author: Shuo Zhang <zhans18@mcmaster.ca>
+Date:   Fri Nov 13 01:50:34 2020 -0500
+
+    style of navigation bar. need little bit change every page
+
+commit 7c8efacb160d61b9fd622dbde15f4302a2c22b7d
+Author: Hongzhao Tan <tanh10@mcmaster.ca>
+Date:   Fri Nov 13 00:37:42 2020 -0500
+
+    add index.html file
+
+commit b83022e03376ef79229fab2ef288d2e3d72ce1ee
+Author: Shuo Zhang <zhans18@mcmaster.ca>
+Date:   Thu Nov 12 23:05:52 2020 -0500
+
+    add README
